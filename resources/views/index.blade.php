@@ -14,43 +14,46 @@
     <body>
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4 mt-5">To-Do List</h1>
-                <p class="lead">Welcome to your To-Do List manager!</p>
+                <h1 class="display-4 mt-5">List Product</h1>
+                <p class="lead">Welcome to your Product List manager!</p>
             </div>
         </div>
 
         <div class="container mt-5">
-            <a href="{{ route('addTask') }}" class="btn btn-primary" type="submit">
-                Add New Task
+            <a href="{{ route('addProduct') }}" class="btn btn-primary" type="submit">
+                Add New Product
             </a>
 
             <div class="d-flex flex-wrap align-content-start mt-5">
-                @foreach ($tasks as $task)
+                @forelse ($products as $product)
                 <div class="card mb-4 me-4" style="width: 18rem">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <div class="h5 card-title">{{ $task->title }}</div>
+                            <div class="h5 card-title">{{ $product->name }}</div>
                             <div>
-                                <div class="rounded p-1 @if($task->priority == 'High') bg-danger text-white @elseif($task->priority == 'Medium') bg-warning text-dark @else bg-success text-white @endif">
-                                    {{ $task->priority }}
+                                <div class="rounded p-1 bg-success text-white">
+                                    {{ $product->quantity }}
                                 </div>
                             </div>
                         </div>
                         <p class="card-text">
-                            {{ $task->detail }}
+                            {{ $product->detail }}
                         </p>
 
                         <div class="mt-3 d-flex">
-                            <a href="#" class="btn btn-primary"> Done </a>
                             <a
-                                href="/edit-task.html"
+                                href="{{ route('editProduct') }}"
                                 class="btn btn-warning ms-2"
                                 >Edit</a
                             >
                         </div>
                     </div>
                 </div>
-                @endforeach
+                @empty
+                <div class="alert alert-info">
+                    No products yet.
+                </div>
+                @endforelse
             </div>
         </div>
 
