@@ -15,22 +15,21 @@
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-3">
-                    <form method="post" action="{{ route('addNewProduct') }}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('addNewTask') }}" enctype="multipart/form-data">
                         @csrf
                         <h3 class="mb-3">Create New Task</h3>
                         <div class="mb-3">
-                            <label for="title" class="form-label">Product Name</label>
+                            <label for="title" class="form-label">Title</label>
                             <input
                                 type="text"
                                 class="form-control"
                                 id="title"
-                                value="{{ old('title') }}"
                                 name="title"
                             />
                         </div>
                         <div class="mb-3">
                             <label for="details" class="form-label"
-                                >Quantity</label
+                                >Details</label
                             >
                             <textarea
                                 name="details"
@@ -38,7 +37,21 @@
                                 cols="30"
                                 rows="2"
                                 class="form-control"
-                            >{{ old('details') }}</textarea>
+                            ></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="priority" class="form-label">
+                                Priority
+                            </label>
+                            <select
+                                name="priority"
+                                id="priority"
+                                class="form-select"
+                            >
+                                <option selected value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
                         </div>
                         <div class="row justify-content-center">
                             <button type="submit" class="btn btn-primary">

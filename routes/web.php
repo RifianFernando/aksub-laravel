@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 
@@ -20,7 +19,7 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/index', [ProductController::class, 'index'])->name('index');
-Route::get('/add-product', [ProductController::class, 'addProduct'])->name('addProduct');
-Route::post('/product/create', [ProductController::class, 'addNewProduct'])->name('addNewProduct');
-Route::get('/edit-product', [ProductController::class, 'editProduct'])->name('editProduct');
+Route::get('/index', [TaskController::class, 'index'])->name('index');
+Route::get('/add-task', [TaskController::class, 'addTask'])->name('addTask');
+Route::post('/task/create', [TaskController::class, 'addNewTask'])->name('addNewTask');
+Route::get('/edit-task', [TaskController::class, 'editTask'])->name('editTask');
