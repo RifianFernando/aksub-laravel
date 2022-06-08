@@ -53,6 +53,22 @@
                                 <option value="High">High</option>
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label for="priority" class="form-label">
+                                User
+                            </label>
+                            <select
+                                name="user_id"
+                                id="priority"
+                                class="form-select"
+                            >
+                            @forelse ($users as $user)
+                                <option  value="{{ $user->id }}">{{ $user->name }}</option>
+                            @empty
+                                <option selected value="">No User</option>
+                            @endforelse
+                            </select>
+                        </div>
                         <div class="row justify-content-center">
                             <button type="submit" class="btn btn-primary">
                                 Submit

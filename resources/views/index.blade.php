@@ -29,7 +29,7 @@
                 <div class="card mb-4 me-4" style="width: 18rem">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <div class="h5 card-title">{{ $task->title }}</div>
+                            <div class="h5 card-title">{{ $task->title }} - {{ $task->user->name}}</div>
                             <div>
                                 <div class="rounded p-1 @if($task->priority == 'High') bg-danger text-white @elseif($task->priority == 'Medium') bg-warning text-dark @else bg-success text-white @endif">
                                     {{ $task->priority }}
@@ -37,13 +37,17 @@
                             </div>
                         </div>
                         <p class="card-text">
-                            {{ $task->detail }}
+                            {{ $task->details }}
                         </p>
 
                         <div class="mt-3 d-flex">
-                            <a href="#" class="btn btn-primary"> Done </a>
+                            <form method="POST" action="{{ route('deleteTask',$task->id) }}">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-primary"> Done </button>
+                            </form>
                             <a
-                                href="/edit-task.html"
+                                href="{{ route('editTask', ['id'=>$task->id]) }}"
                                 class="btn btn-warning ms-2"
                                 >Edit</a
                             >

@@ -15,7 +15,8 @@
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-3">
-                    <form method="" action="">
+                    <form method="POST" action="{{ route('updateTask', $task->id) }}">
+                        @csrf
                         <h3 class="mb-3">Edit Task</h3>
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
@@ -24,7 +25,7 @@
                                 class="form-control"
                                 id="title"
                                 name="title"
-                                value="Title"
+                                value="{{ $task->title }}"
                             />
                         </div>
                         <div class="mb-3">
@@ -37,8 +38,7 @@
                                 cols="30"
                                 rows="2"
                                 class="form-control"
-                            >
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut culpa assumenda odit eaque nam dolores commodi dignissimos, minus dolorem in accusantium, quia a delectus aliquam ex velit numquam fugiat saepe!</textarea
+                            >{{ $task->details }}</textarea
                             >
                         </div>
                         <div class="mb-3">
@@ -50,9 +50,25 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut culpa assumenda odit
                                 id="priority"
                                 class="form-select"
                             >
-                                <option value="Low" selected>Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="High">High</option>
+                                <option value="Low" @if($task->priority == "Low")  selected @endif>Low</option>
+                                <option value="Medium"@if($task->priority == "Medium")  selected @endif>Medium</option>
+                                <option value="High"@if($task->priority == "High")  selected @endif>High</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="priority" class="form-label">
+                                User
+                            </label>
+                            <select
+                                name="user_id"
+                                id="priority"
+                                class="form-select"
+                            >
+                            @forelse ($users as $user)
+                                <option  value="{{ $user->id }}">{{ $user->name }}</option>
+                            @empty
+                                <option selected value="">No User</option>
+                            @endforelse
                             </select>
                         </div>
                         <div class="row justify-content-center">

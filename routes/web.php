@@ -19,7 +19,16 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/index', [TaskController::class, 'index'])->name('index');
-Route::get('/add-task', [TaskController::class, 'addTask'])->name('addTask');
-Route::post('/task/create', [TaskController::class, 'addNewTask'])->name('addNewTask');
-Route::get('/edit-task', [TaskController::class, 'editTask'])->name('editTask');
+Route::get('/', [TaskController::class, 'index'])->name('index');
+
+Route::prefix('tasks')->group(function () {
+    Route::get('/add', [TaskController::class, 'addTask'])->name('addTask');
+    Route::post('/create', [TaskController::class, 'addNewTask'])->name('addNewTask');
+    Route::get('/{id}/edit', [TaskController::class, 'editTask'])->name('editTask');
+    
+    Route::post('/{id}/update', [TaskController::class, 'updateTask'])->name('updateTask');
+    
+    Route::delete('/{id}/delete', [TaskController::class, 'deleteTask'])->name('deleteTask');
+});
+
+
